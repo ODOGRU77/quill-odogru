@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
@@ -34,6 +35,7 @@
     "langchain": "^0.0.161",
     "lucide-react": "^0.284.0",
     "next": "13.5.4",
+    "nextjs": "^0.0.3",
     "openai": "^4.11.1",
     "pdf-parse": "^1.1.1",
     "react": "^18",
