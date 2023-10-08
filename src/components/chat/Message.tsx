@@ -35,6 +35,7 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(
             <Icons.logo className="fill-zinc-300 h-3/4 w-3/4" />
           )}
         </div>
+
         <div
           className={cn("flex flex-col space-y-2 text-base max-w-md mx-2", {
             "order-1 items-end": message.isUserMessage,
@@ -62,11 +63,11 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(
             ) : (
               message.text
             )}
-            {message.id! == "loading-message" ? (
+            {message.id !== "loading-message" ? (
               <div
                 className={cn("text-xs select-none mt-2 w-full text-right", {
                   "text-zinc-500": !message.isUserMessage,
-                  "text-blue-500": message.isUserMessage,
+                  "text-blue-300": message.isUserMessage,
                 })}
               >
                 {format(new Date(message.createdAt), "HH:mm")}
