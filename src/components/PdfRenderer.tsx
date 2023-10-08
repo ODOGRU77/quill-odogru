@@ -8,15 +8,19 @@ import {
   Search,
 } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
+
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import { useToast } from "./ui/use-toast";
+
 import { useResizeDetector } from "react-resize-detector";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useState } from "react";
+
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
 import {
@@ -41,8 +45,9 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
   const [numPages, setNumPages] = useState<number>();
   const [currPage, setCurrPage] = useState<number>(1);
   const [scale, setScale] = useState<number>(1);
-  const [rotation, setRotation] = useState(0);
+  const [rotation, setRotation] = useState<number>(0);
   const [renderedScale, setRenderedScale] = useState<number | null>(null);
+
   const isLoading = renderedScale !== scale;
 
   const CustomPageValidator = z.object({
@@ -65,6 +70,8 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
     resolver: zodResolver(CustomPageValidator),
   });
 
+  console.log(errors);
+
   const { width, ref } = useResizeDetector();
 
   const handlePageSubmit = ({ page }: TCustomPageValidator) => {
@@ -73,7 +80,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
   };
 
   return (
-    <div className="w-full bg-white rounded-md shadow flex flex-col items-center   ">
+    <div className="w-full bg-white rounded-md shadow flex flex-col items-center">
       <div className="h-14 w-full border-b border-zinc-200 flex items-center justify-between px-2">
         <div className="flex items-center gap-1.5">
           <Button
@@ -81,15 +88,14 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             onClick={() => {
               setCurrPage((prev) => (prev - 1 > 1 ? prev - 1 : 1));
               setValue("page", String(currPage - 1));
-              setValue("page", String(currPage - 1));
             }}
             variant="ghost"
-            aria-label="previous page "
+            aria-label="previous page"
           >
             <ChevronDown className="h-4 w-4" />
           </Button>
 
-          <div className="flex items-center gap1.5">
+          <div className="flex items-center gap-1.5">
             <Input
               {...register("page")}
               className={cn(
@@ -102,7 +108,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
                 }
               }}
             />
-            <p className="text-zinc-700 text-sm space-x-1 ">
+            <p className="text-zinc-700 text-sm space-x-1">
               <span>/</span>
               <span>{numPages ?? "x"}</span>
             </p>
@@ -117,17 +123,19 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
               setValue("page", String(currPage + 1));
             }}
             variant="ghost"
-            aria-label="next page "
+            aria-label="next page"
           >
             <ChevronUp className="h-4 w-4" />
           </Button>
         </div>
+
         <div className="space-x-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button className="gap-1.5" aria-label="zoom" variant="ghost">
                 <Search className="h-4 w-4" />
-                {scale * 100}%<ChevronDown className="h-3 w-3 opacity-50" />
+                {scale * 100}%
+                <ChevronDown className="h-3 w-3 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -145,6 +153,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+
           <Button
             onClick={() => setRotation((prev) => prev + 90)}
             variant="ghost"
