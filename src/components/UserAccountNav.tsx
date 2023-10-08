@@ -9,10 +9,10 @@ import {
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import Image from "next/image";
+import { Icons } from "./Icons";
 import Link from "next/link";
 import { Gem } from "lucide-react";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Icons } from "./icons";
 
 interface UserAccountNavProps {
   email: string | undefined;
