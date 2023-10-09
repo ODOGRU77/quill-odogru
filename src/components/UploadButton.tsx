@@ -61,7 +61,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
         if (!res) {
           return toast({
             title: "Something went wrong",
-            description: "Please try again later",
+            description: "Please check the file size",
             variant: "destructive",
           });
         }
@@ -73,7 +73,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
         if (!key) {
           return toast({
             title: "Something went wrong",
-            description: "Please try again later",
+            description: "Please check the file size",
             variant: "destructive",
           });
         }
